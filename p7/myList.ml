@@ -14,12 +14,12 @@ let rec last l =
   | x :: [] -> x
   | _ :: tail -> last tail;;
 
-let rec lenght l = 
+let rec length l = 
     match l with
     | [] -> 0
-    | _ :: tail -> 1 + lenght tail;;
+    | _ :: tail -> 1 + length tail;;
 
-let lenght' l = 
+let length' l = 
   let rec aux l counter = 
     match l with
     | [] -> counter
@@ -29,8 +29,8 @@ let lenght' l =
 let rec compare_lengths l1 l2 = 
   match (l1, l2) with
   | ([], []) -> 0
-  | ([], _ :: _) -> 1
-  | (_ :: _, []) -> -1
+  | ([], _ :: _) -> -1
+  | (_ :: _, []) -> 1
   | (_ :: tail1, _ :: tail2) -> compare_lengths tail1 tail2;;
 
 let rec append l1 l2 = 
@@ -38,12 +38,10 @@ let rec append l1 l2 =
   | [] -> l2
   | x :: tail -> x :: (append tail l2);;
 
-let rev_append l1 l2 = 
-  let rec aux l1 l2 acc = 
-    match l1 with
-    | [] -> l2
-    | x :: tail -> aux tail l2 (x :: acc)
-  in aux l1 l2 [];;
+let rec rev_append l1 l2 =
+  match l1 with
+  | [] -> l2
+  | x :: tail -> rev_append tail (x :: l2)
 
 let rev l = 
   let rec aux l acc = 
@@ -90,13 +88,13 @@ let rec map2 f l1 l2 =
   match (l1, l2) with
   | ([], []) -> []
   | (x1 :: tail1, x2 :: tail2) -> f x1 x2 :: map2 f tail1 tail2
-  | _ -> raise (Failure "map2");;
+  | _ -> raise (Invalid_argument "map2");;
 
 let rec combine l1 l2 = 
   match (l1, l2) with
   | ([], []) -> []
   | (x1 :: tail1, x2 :: tail2) -> (x1, x2) :: combine tail1 tail2
-  | _ -> raise (Failure "combine");;
+  | _ -> raise (Invalid_argument "combine");;
 
 let rec split l = 
   match l with

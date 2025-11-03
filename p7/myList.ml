@@ -59,9 +59,9 @@ let flatten ll = concat ll;;
 
 let init l f = 
   let rec aux i acc =
-    if i < 0 then rev acc
-    else aux (i - 1) (f i :: acc)
-  in aux (l - 1) [];;
+    if i >= l then rev acc
+    else aux (i + 1) (f i :: acc)
+  in aux (0) [];;
 
 let nth l n = 
   if n < 0 then raise (Failure "nth")

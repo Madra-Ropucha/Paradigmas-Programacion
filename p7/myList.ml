@@ -64,7 +64,7 @@ let init l f =
   in aux (0) [];;
 
 let nth l n = 
-  if n < 0 then raise (Failure "nth")
+  if n < 0 then raise (Invalid_argument "nth")
   else
   let rec aux l n =
     match l with

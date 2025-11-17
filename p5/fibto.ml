@@ -1,8 +1,3 @@
-if Array.length Sys.argv <> 2 then begin
-  print_string "Invalid number of arguments\n";
-  Sys.exit 1
-end;
-
 let rec fib n =
   if n <= 2 then 1
   else fib (n-1) + fib (n-2);;
@@ -36,7 +31,13 @@ let rec printList l =
 let fibto lista = 
   printList()
 
-let fastFib n =
+let () =
+  if Array.length Sys.argv <> 2 then (
+    print_endline "fibto: Invalid number of arguments";
+    exit 1
+  );
+
+(*let fastFib n =
   let x = ref 0 in 
   let y = ref 1 in
   let counter = ref n in
@@ -48,4 +49,4 @@ let fastFib n =
     counter := !counter - 1
   done;
   if !x > !y then !x else !y
-;;
+;;*)

@@ -38,8 +38,8 @@ let otro = otro origen destino in
   if nd = 1  
   then (origen, destino) 
   else  let mitad = int_of_float (2. ** float (nd - 1)) in
-  if n < mitad 
-    then n_hanoi_mov n (nd - 1) origen otro  
-  else if n = mitad  
-    then (origen, destino) 
-  else n_hanoi_mov (n - mitad) (nd - 1) otro destino
+    if n < mitad 
+      then n_hanoi_mov n (nd - 1) origen otro  
+    else if n = mitad  
+      then (origen, destino) 
+    else n_hanoi_mov (n - mitad) (nd - 1) otro destino

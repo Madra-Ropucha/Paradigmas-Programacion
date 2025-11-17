@@ -25,7 +25,7 @@ let comp f g = fun x -> f (g x)
 
 let f = let square x = x * x in comp square ((+) 1);;
 (*f 1, f 2, f 3;;*)
-(*no tengo ni idea de que va a hacer*)
+(*se que va a calcular los cuadrados de un numero, pero no se como sera la salida*)
 (* devuelve un int * int * int = (4, 9, 16) *)
 
 (* i : 'a -> 'a *)

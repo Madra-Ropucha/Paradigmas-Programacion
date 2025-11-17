@@ -31,17 +31,3 @@ let () =
 else
     let n = int_of_string Sys.argv.(1) in
     fibto n ;;
-
-(*let fastFib n =
-  let x = ref 0 in 
-  let y = ref 1 in
-  let counter = ref n in
-  while !counter > 0 do
-    if !x > !y then
-      y := !y + !x
-    else 
-      x := !x + !y;
-    counter := !counter - 1
-  done;
-  if !x > !y then !x else !y
-;;*)

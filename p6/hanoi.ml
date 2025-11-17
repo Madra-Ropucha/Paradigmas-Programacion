@@ -9,14 +9,14 @@ let mueve (origen, destino) =
   | (2, 3) -> "1-->2   3\n"
   | (3, 1) -> "1<--2---3\n"
   | (3, 2) -> "1   2<--3\n"
-  | _ -> ""
+  | _ -> raise (invalid_arg "mueve")
 
 let rec hanoi n origen destino =
   (* n número de discos, 1 <= ori <= 3, 1 <= dest <= 3, ori <> des *)
   if n = 0 then ""
   else
     let otro = otro origen destino in
-    hanoi (n-1) origen otro ^ mueve (origen, destino) ^ hanoi (n-1) otro destino
+    hanoi (n - 1) origen otro ^ mueve (origen, destino) ^ hanoi (n - 1) otro destino
 
 let hanoi n origen destino =
   if n = 0 || origen = destino then ""

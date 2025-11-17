@@ -3,37 +3,32 @@ let fib n = let rec aux a b m =
   else aux b (a + b) (m - 1)
 in aux 0 1 n;;
 
-let fibto n =
-  let rec f x =
-    if fib x > n || fib x < 1 then ()
-    else begin
-      print_int (fib x);
-      if fib(x+1) < n then print_string ", ";
-      f (x + 1)
-    end
+let fibtoList n =
+  let rec aux i =
+    let fi = fib i in
+    if fi > n then []
+    else fi :: aux (i + 1)
   in
-  f 1;;
-
-let rec fibtoList l = 
-  let local = 1 in
-    match (local, l) with
-    | fib(local) < l -> fib(local) :: 
-    | fib(local) > l -> 
+  aux 1
 
 let rec printList l =
   match l with
   | [] -> ()
-  | [head] -> print_int head
+  | head :: [] -> 
+    let _ = print_int head in
+    print_newline ()
   | head :: tail ->
       let _ = print_int head in
       let _ = print_string ", " in
-      printList tail
+      printList tail  
 
-let fibto lista = 
-  printList()
+let fibto n = 
+  printList(fibtoList n)
 
 let () =
   if Array.length Sys.argv <> 2 then (
     print_endline "fibto: Invalid number of arguments";
-    exit 1
-  );
+    exit 1)
+else
+    let n = int_of_string Sys.argv.(1) in
+    fibto n ;;

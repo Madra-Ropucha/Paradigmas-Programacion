@@ -66,7 +66,7 @@ abs (1 - 2);;
 (*devuelve 1 ya que el resultado de 1 - 2 es -1 y lo vuelve positivo*)
 abs 1;;
 (*devuelve 1*)
-abs -1;;
+abs - 1;;
 (*devuelve 1*)
 (*correccion: da un error que ya coge primero el - y no el valor completo que es -1*)
 let abs = function x -> if x >= 0. then x else -. x;;

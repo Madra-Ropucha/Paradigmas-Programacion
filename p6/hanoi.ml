@@ -1,42 +1,45 @@
-let otro origen destino = 
-  6 - origen - destino;;
+let otro ori des =
+6 - ori - des
 
-let mueve (origen, destino) = 
-  match (origen, destino) with
-  | (1, 2) -> "1-->2   3\n"
+let mueve (ori, des) =
+  match (ori, des) with
+  | (1, 2) -> "1---2-->3\n"
   | (1, 3) -> "1---2-->3\n"
-  | (2, 3) -> "1   2-->3\n"
-  | (2, 1) -> "1<--2   3\n"
+  | (2, 1) -> "1   2<--3\n"
+  | (2, 3) -> "1-->2   3\n"
   | (3, 1) -> "1<--2---3\n"
   | (3, 2) -> "1   2<--3\n"
-  | (o, d) -> failwith (Printf.sprintf "Invalid move: (%d, %d)" o d)
-;;
+  | _ -> ""
 
-let rec hanoi n origen destino =
-  (* n número de print_hanoi 3 3 2;;discos, 1 <= origen <= 3, 1 <= destinot <= 3, origen <> destino *)
+let rec hanoi n ori des =
+  (* n número de discos, 1 <= ori <= 3, 1 <= dest <= 3, ori <> des *)
   if n = 0 then ""
   else
-    let otro = otro origen destino in
-    hanoi (n-1) origen otro ^ mueve (origen, destino) ^ hanoi (n-1) otro destino;;
+    let otro = otro ori des in
+    hanoi (n-1) ori otro ^ mueve (ori, des) ^ hanoi (n-1) otro des
 
-let rec hanoi n origen destino =
-  (* n número de print_hanoi 3 3 2;;discos, 1 <= origen <= 3, 1 <= destinot <= 3, origen <> destino *)
-  if n = 0 then ""
-  else
-    let otro = otro origen destino in
-    hanoi (n-1) origen otro ^ mueve (origen, destino) ^ hanoi (n-1) otro destino;;
-    
-let hanoi n origen destino =
-  if n = 0 || origen = destino then ""
-  else hanoi n origen destino;;
+let hanoi n ori des =
+  if n = 0 || ori = des then ""
+  else hanoi n ori des
 
-let print_hanoi n origen destino =
-  if n < 0 || origen < 1 || origen > 3 || destino < 1 || destino > 3
+let print_hanoi n ori des =
+  if n < 0 || ori < 1 || ori > 3 || des < 1 || des > 3
   then print_endline "**ERROR**"
   else print_endline ("=========\n" ^
-                      hanoi n origen destino ^
-                      "=========");;
+                      hanoi n ori des ^
+                      "=========")
 
 let crono f x =
   let t = Sys.time () in
   f x; Sys.time () -. t;;
+
+let rec n_hanoi_mov n nd ori des  = 
+let otro = otro ori des in 
+  if nd = 1  
+  then (ori, des) 
+  else  let mitad = int_of_float (2. ** float (nd - 1)) in
+  if n < mitad 
+    then n_hanoi_mov n (nd - 1) ori otro  
+  else if n = mitad  
+    then (ori, des) 
+  else n_hanoi_mov (n - mitad) (nd - 1) otro des

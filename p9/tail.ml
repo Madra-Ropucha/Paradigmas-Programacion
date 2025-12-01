@@ -20,3 +20,4 @@ let compress l =
 
 
 let fold_right f l acc =
+(* TODO: ESTA MIERDA*)

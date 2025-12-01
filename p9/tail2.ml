@@ -12,3 +12,6 @@ let compress l =
         if h1 = h2 then aux acc (h2::t)
         else aux (h1::acc) (h2::t)
   in aux [] l;;
+
+  (* TODO: COMPARAR ESTAS DEFINICIONES CON LAS DEL EJERCICIO ANTERIOR 
+  MIRAR SU RENDIMIENTO SOBRE LISTAS LARGAS Y ESCRIBIR CONCLUSIONES*)

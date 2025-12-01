@@ -8,5 +8,15 @@ let front l =
   in List.rev (aux [] l);;
 
 let compress l = 
+  match l with
+      []     -> []
+    | h::[]  -> [h]
+    | h::t   -> let rec aux acc l = match l with
+          []        -> acc
+        | h::[]     -> h::acc
+        | h1::h2::t -> if h1 == h2 then aux acc (h2::t)
+                       else aux (h1::acc) (h2::t)
+    in aux [] (List.rev l);;
+
 
 let fold_right f l acc =

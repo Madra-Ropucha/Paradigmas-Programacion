@@ -11,6 +11,7 @@
 
 let concat' l = 
   List.fold_right (fun h acc -> List.append h acc) l [];;
+(* TODO: EXPLICAR PORQUE FOLD RIGHT ES MEJOR*)
 
 let concat'' l = 
   let rec aux acc = function
@@ -24,3 +25,4 @@ let sublists l =
   List.fold_left (fun acc h ->
     acc @ (List.map (fun sub -> sub @ [h]) acc)
   ) [[]] l;;
+(* TODO: INTENTAR VER COMO HACER ESTO HUMANO*)

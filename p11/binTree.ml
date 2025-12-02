@@ -55,9 +55,10 @@ let rec postorder t =
         Empty -> []
         | Node (l, x, r) -> (postorder l) @ (postorder l) @ x;;
 
-
-(* TODO: HACER LA IMPLEMENTACION DE BREADTH*)
 let rec breadth t =
+  match t with 
+    Empty -> []
+  | Node (l, x, r) -> [x] @ (breadth l) @ (breadth r);;
 
 let rec leaves t = 
   match t with 

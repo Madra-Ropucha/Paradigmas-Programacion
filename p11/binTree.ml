@@ -11,7 +11,7 @@ let is_empty t =
     Empty -> true
   | _     -> false;;
 
-let leaf_tree x = function x -> Node (Empty, x, Empty);;
+let leaf_tree x = Node (Empty, x, Empty);;
 
 let comb x l r = Node (l, x, r);;
 

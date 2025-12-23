@@ -18,7 +18,6 @@ let rec fold_right f l acc =
 [@tail_mod_cons];;
 (*let[@tail_mod_cons] fold_right =
 List.fold_right*)
-(* Tail Modulo Constructor no se puede aplicar en fold_righy, ya que no es una funcion recursiva y tampoco puede usarse dentro de otras fuciones que se llaman en la funcion aplicada, es decir Tail Modulo Constructor no puede modificar fold_right internamente*)
+(* Tail Modulo Constructor no se puede aplicar en fold_right, ya que no es una funcion recursiva y tampoco puede usarse dentro de otras funciones que se llaman en la funcion aplicada, es decir Tail Modulo Constructor no puede modificar fold_right internamente*)
 
-  (* TODO: COMPARAR ESTAS DEFINICIONES CON LAS DEL EJERCICIO ANTERIOR 
-  MIRAR SU RENDIMIENTO SOBRE LISTAS LARGAS Y ESCRIBIR CONCLUSIONES*)
+(* He comparado el tiempo de ejecucion con listas de 1M de elementos y no he visto una diferencia notoria *)

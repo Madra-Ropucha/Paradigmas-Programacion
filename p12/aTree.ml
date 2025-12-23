@@ -1,7 +1,6 @@
 type 'a a_tree = 'a option array
 type 'a t = 'a a_tree
 
-
 let from_bin (t : 'a BinTree.t) : 'a t =
   let h = BinTree.height t in
   let size = (1 lsl h) - 1 in
@@ -17,7 +16,6 @@ let from_bin (t : 'a BinTree.t) : 'a t =
   fill 0 t;
   a
 
-
 let breadth (a : 'a t) : 'a list =
   let res = ref [] in
   for i = 0 to Array.length a - 1 do
@@ -26,7 +24,6 @@ let breadth (a : 'a t) : 'a list =
     | None -> ()
   done;
   !res
-
 
 let mem (cmp : 'a -> 'a -> bool) (x : 'a) (a : 'a t) : bool =
   let i = ref 0 in

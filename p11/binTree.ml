@@ -48,29 +48,12 @@ let rec preorder t =
 let rec inorder t = 
     match t with
         Empty -> []
-<<<<<<< HEAD
         | Node (l, x, r) -> (inorder l) @ [x] @ (inorder r);;
-=======
-        | Node (l, x, r) -> inorder l @ [x] @ inorder r
->>>>>>> 47c7b79
 
 let rec postorder t = 
     match t with
         Empty -> []
-<<<<<<< HEAD
-        | Node (l, x, r) -> (postorder l) @ (postorder r) @ [x];;
-
-let breadth t =
-  let rec aux queue =
-    match queue with
-    | [] -> []
-    | Empty :: rest -> aux rest
-    | Node (l, x, r) :: rest ->
-        x :: aux (rest @ [l; r])
-  in
-  aux [t];;
-=======
-        | Node (l, x, r) -> postorder l @ postorder r @ [x]
+        | Node (l, x, r) -> (postorder l) @ (postorder r) @ [x]
 
 let breadth t =
   let rec aux = function
@@ -79,7 +62,6 @@ let breadth t =
     | Node (l, x, r) :: q -> x :: aux (q @ [l; r])
   in
   aux [t]
->>>>>>> 47c7b79
 
 let rec leaves t = 
   match t with 
@@ -87,7 +69,6 @@ let rec leaves t =
   | Node (Empty, x, Empty) -> [x]
   | Node (l, _, r) -> (leaves l) @ (leaves r);;
 
-<<<<<<< HEAD
 let rec find_in_depth func t =
   match t with
   | Empty -> raise (Not_found)
@@ -96,17 +77,6 @@ let rec find_in_depth func t =
       else
         try find_in_depth func l
         with Not_found -> find_in_depth func r;;
-=======
-let rec find_in_depth p t =
-  match t with
-  | Empty -> raise Not_found
-  | Node (l, x, r) ->
-      if p x then x
-      else
-        try find_in_depth p l
-        with Not_found -> find_in_depth p r
-
->>>>>>> 47c7b79
 
 let rec exists p t =
     match t with 

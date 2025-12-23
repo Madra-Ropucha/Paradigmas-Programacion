@@ -1,5 +1,5 @@
 type 'a bin_tree =
-    | Empty
+    Empty
     | Node of 'a bin_tree * 'a * 'a bin_tree;;
 
 type 'a t = 'a bin_tree;;
@@ -43,33 +43,16 @@ let rec height t =
 let rec preorder t = 
     match t with
         Empty -> []
-        | Node (l, x, r) -> [x] @ (preorder l) @ (preorder r);;
+        | Node (l, x, r) -> x :: (preorder l) @ (preorder r);;
 
 let rec inorder t = 
     match t with
         Empty -> []
-<<<<<<< HEAD
-        | Node (l, x, r) -> (inorder l) @ [x] @ (inorder r);;
-=======
         | Node (l, x, r) -> inorder l @ [x] @ inorder r
->>>>>>> 47c7b79
 
 let rec postorder t = 
     match t with
         Empty -> []
-<<<<<<< HEAD
-        | Node (l, x, r) -> (postorder l) @ (postorder r) @ [x];;
-
-let breadth t =
-  let rec aux queue =
-    match queue with
-    | [] -> []
-    | Empty :: rest -> aux rest
-    | Node (l, x, r) :: rest ->
-        x :: aux (rest @ [l; r])
-  in
-  aux [t];;
-=======
         | Node (l, x, r) -> postorder l @ postorder r @ [x]
 
 let breadth t =
@@ -79,7 +62,6 @@ let breadth t =
     | Node (l, x, r) :: q -> x :: aux (q @ [l; r])
   in
   aux [t]
->>>>>>> 47c7b79
 
 let rec leaves t = 
   match t with 
@@ -87,16 +69,6 @@ let rec leaves t =
   | Node (Empty, x, Empty) -> [x]
   | Node (l, _, r) -> (leaves l) @ (leaves r);;
 
-<<<<<<< HEAD
-let rec find_in_depth func t =
-  match t with
-  | Empty -> raise (Not_found)
-  | Node (l, y, r) ->
-      if func y then y
-      else
-        try find_in_depth func l
-        with Not_found -> find_in_depth func r;;
-=======
 let rec find_in_depth p t =
   match t with
   | Empty -> raise Not_found
@@ -106,7 +78,6 @@ let rec find_in_depth p t =
         try find_in_depth p l
         with Not_found -> find_in_depth p r
 
->>>>>>> 47c7b79
 
 let rec exists p t =
     match t with 
@@ -131,8 +102,3 @@ let rec mirror t =
     match t with 
         Empty -> Empty
         | Node (l, x, r) -> Node (mirror r, x, mirror l);;
-
-let is_leave t =
-  match t with
-  Node (Empty, _, Empty) -> true
-  | _ -> false;;

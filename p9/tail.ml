@@ -20,4 +20,6 @@ let compress l =
 
 
 let fold_right f l acc =
+  let reverse = List.rev l
+  in List.fold_left (fun aux x -> f x aux) acc reverse;;
 (* TODO: ESTA MIERDA*)

@@ -1,5 +1,5 @@
 type 'a bin_tree =
-    Empty
+    | Empty
     | Node of 'a bin_tree * 'a * 'a bin_tree;;
 
 type 'a t = 'a bin_tree;;
@@ -20,12 +20,12 @@ let root t =
       Empty -> raise (Failure "root")
     | Node (_, x, _) -> x;;
 
-let left_brach t = 
+let left_branch t = 
     match t with 
       Empty -> raise (Failure "left_branch")
     | Node (l, _, _) -> l;;
 
-let right_brach t = 
+let right_branch t = 
     match t with 
       Empty -> raise (Failure "right_branch")
     | Node (_, _, r) -> r;;
@@ -43,22 +43,27 @@ let rec height t =
 let rec preorder t = 
     match t with
         Empty -> []
-        | Node (l, x, r) -> x :: (preorder l) @ (preorder r);;
+        | Node (l, x, r) -> [x] @ (preorder l) @ (preorder r);;
 
 let rec inorder t = 
     match t with
         Empty -> []
-        | Node (l, x, r) -> (inorder l) @ x @ (inorder r);;
+        | Node (l, x, r) -> (inorder l) @ [x] @ (inorder r);;
 
 let rec postorder t = 
     match t with
         Empty -> []
-        | Node (l, x, r) -> (postorder l) @ (postorder l) @ x;;
+        | Node (l, x, r) -> (postorder l) @ (postorder r) @ [x];;
 
-let rec breadth t =
-  match t with 
-    Empty -> []
-  | Node (l, x, r) -> [x] @ (breadth l) @ (breadth r);;
+let breadth t =
+  let rec aux queue =
+    match queue with
+    | [] -> []
+    | Empty :: rest -> aux rest
+    | Node (l, x, r) :: rest ->
+        x :: aux (rest @ [l; r])
+  in
+  aux [t];;
 
 let rec leaves t = 
   match t with 
@@ -66,12 +71,14 @@ let rec leaves t =
   | Node (Empty, x, Empty) -> [x]
   | Node (l, _, r) -> (leaves l) @ (leaves r);;
 
-let rec find_in_depth x t = 
-    match t with 
-        Empty -> false
-        | Node (l, y, r) -> 
-            if x = y then true
-            else find_in_depth x l || find_in_depth x r;;
+let rec find_in_depth func t =
+  match t with
+  | Empty -> raise (Not_found)
+  | Node (l, y, r) ->
+      if func y then y
+      else
+        try find_in_depth func l
+        with Not_found -> find_in_depth func r;;
 
 let rec exists p t =
     match t with 
@@ -96,3 +103,8 @@ let rec mirror t =
     match t with 
         Empty -> Empty
         | Node (l, x, r) -> Node (mirror r, x, mirror l);;
+
+let is_leave t =
+  match t with
+  Node (Empty, _, Empty) -> true
+  | _ -> false;;
